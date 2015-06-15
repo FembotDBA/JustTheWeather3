@@ -1,5 +1,7 @@
 package com.fembotdba.www.justtheweather;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,10 +24,18 @@ public class Main extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Boolean useGPS = useGPS();
         setContentView(R.layout.activity_main);
         createGreeting();
         createDefaultLocation();
         fillCurrentWeatherGraphic();
+    }
+
+    public boolean useGPS()
+    {
+        SharedPreferences prefs = this.getSharedPreferences("com.fembotdba.www.justtheweather", Context.MODE_PRIVATE);
+        Boolean settingsGPS = prefs.getBoolean("useGPS", false);
+        return settingsGPS;
     }
 
     public void createDefaultLocation()
