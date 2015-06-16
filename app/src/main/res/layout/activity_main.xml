@@ -37,31 +37,42 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/FrameGraphic"
-            android:layout_below="@id/DateLinear"
             android:layout_gravity="center">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageWeatherIcon" />
+                android:id="@+id/imageWeatherIcon"
+                android:cropToPadding="false" />
         </FrameLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/FrameGraphic"
             android:id="@+id/LocationLinear">
 
             <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/txtLocation"
+                android:id="@+id/tvLocation"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
-        </LinearLayout>
+                android:textColor="@android:color/white"
+                android:layout_centerInParent="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvTemp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:layout_below="@+id/tvLocation"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
 
     </LinearLayout>
 

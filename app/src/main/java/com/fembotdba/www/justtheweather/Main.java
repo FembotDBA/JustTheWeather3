@@ -1,5 +1,6 @@
 package com.fembotdba.www.justtheweather;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fembotdba.www.justtheweather.Weather;
+
 import org.w3c.dom.Text;
 
 import java.text.DateFormat;
@@ -19,15 +22,18 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class Main extends ActionBarActivity {
+public class Main extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Boolean useGPS = useGPS();
         setContentView(R.layout.activity_main);
         createGreeting();
-        createDefaultLocation();
+        String currentLocation = createDefaultLocation();
+        Weather weather = new Weather();
+        String temp = weather.getWeather(currentLocation);
+        TextView tvTemp = (TextView)findViewById(R.id.tvTemp);
+        tvTemp.setText(temp);
         fillCurrentWeatherGraphic();
     }
 
@@ -38,16 +44,19 @@ public class Main extends ActionBarActivity {
         return settingsGPS;
     }
 
-    public void createDefaultLocation()
+    public String createDefaultLocation()
     {
-        TextView tvLocation = (TextView)findViewById(R.id.txtLocation);
-        tvLocation.setText("San Diego, CA");
+        TextView tvLocation = (TextView)findViewById(R.id.tvLocation);
+        //stub - get location from gps or saved location
+        String currentLocation = "San Diego, CA";
+        tvLocation.setText(currentLocation);
+        return currentLocation.replace(" ","");
     }
 
     public void createGreeting()
     {
         TextView tvGreeting = (TextView)findViewById(R.id.txtGreeting);
-        SimpleDateFormat simpleFormat = new SimpleDateFormat("EEEE, MMM dd, yyyy");
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("EEEE, MMM dd, yyyy", Locale.US);
         Calendar c = Calendar.getInstance();
         String today = simpleFormat.format(c.getTime());
         tvGreeting.setText(today);
